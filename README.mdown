@@ -1,0 +1,14 @@
+## My Project Boilerplate ##
+
+Starting point for some of my projects. Already includes libraries and files
+that I use often.
+
+You may consider using [HTML5 Boilerplate](http://html5boilerplate.com/)
+instead of my boilerplate since it's broadly used, have proper documentation, 
+lots of contributors, etc...
+
+Not sure how far I will keep using this structure and even if this repository
+makes any sense since I'm constantly changing things and every project have
+different needs... let's see how things goes.
+
+**Use it with care and don't take it too serious.**
