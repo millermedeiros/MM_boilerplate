@@ -1,14 +1,103 @@
-## My Project Boilerplate ##
+
+# My Basic Project Boilerplate #
 
 Starting point for some of my projects. Already includes libraries and files
-that I use often.
+that I use often and some boilerplate code.
 
-You may consider using [HTML5 Boilerplate](http://html5boilerplate.com/)
+You should consider using [HTML5 Boilerplate](http://html5boilerplate.com/) 
 instead of my boilerplate since it's broadly used, have proper documentation, 
-lots of contributors, etc...
+lots of contributors, etc... The only reason I'm not using it is because it 
+doesn't fit my current workflow.. - I like AMD modules and been using 
+RequireJS optimizer to combine my JavaScript and CSS files, I'm also 
+splitting my CSS across multiple files and have a base CSS framework that I 
+use on some projects [basis.css](https://github.com/millermedeiros/basis.css). 
+Even if I used HTML5 Boilerplate I would still need to spend some time tweaking 
+it for my need...
 
 Not sure how far I will keep using this structure and even if this repository
 makes any sense since I'm constantly changing things and every project have
-different needs... let's see how things goes.
+different needs but I used a similar structure on the past few projects and it
+worked really well... Maybe I will even create different branches for different 
+kinds of projects and some sample JS code for the core structure of single
+page apps and normal HTML sites. - let's see how things goes...
 
 **Use it with care and don't take it too serious.**
+
+PS: It doesn't come with any server settings files, use [html5-bolierplate server
+configs](https://github.com/paulirish/html5-boilerplate-server-configs)
+PS2: I'm borrowing many things from HTML5 Boilerplate but some 
+things are just coincidence, I will try to give credits whenever possible and
+copy some useful stuff that is still missing (like optimizing images), but will
+try to keep it simple.
+
+
+
+## Files/Folder Structure ##
+
+Since it is common to have multiple "apps" and developers working for the same 
+project/client I create a new folder for each "app" like *site/*, *mobile/*, 
+*facebook_tab/*, *iphone_app/*, *video_player/*, etc..
+
+
+```
+MM_boilerplate
+|~deploy/               - Distribution files (content generated after build)
+`~dev/                  - Development files
+  `~site/                   - App (create sibling folders for each new app of the same project)
+    |~_build/                   - Files used on the build process
+    | |+closure/                    - Google Closure compiler
+    | |+rhino/                      - Mozilla Rhino
+    | |+rjs/                        - r.js (RequireJS) optimizer
+    | |-build.properties            - Build settings
+    | |-css_build.js                - CSS optimization settings
+    | `-js_build.js                 - JS optimization settings
+    |~content/                  - Dynamic content like images, videos, etc. (simulate CMS or CDN)
+    |~css/                      - Stylesheets
+    | |+basis/                      - Basis.css framework
+    | |+core/                       - Core strucure and generic classes/styles
+    | |+fonts/                      - Webfonts
+    | |+sections/                   - Style specific to each section/page/template
+    | | `-home.css                      - Home page styles (create one file per section/page/template)
+    | |+widgets/                    - Widgets/components styles
+    | `-main.css                    - Main stylesheet (loaded by all pages)
+    |~img/                      - Image files (only images used by CSS)
+    | |~core                        - Images shared by multiple sections (logo, bg, etc..)
+    | `~home                        - Images used by the home page (create one folder per section/page/template)
+    |~js/                       - Scripts
+    | |+core/                       - Core structure
+    | |+lib/                        - 3rd-party libraries
+    | |+sections/                   - Scripts specific to each section/page/template
+    | |+widgets/                    - Components/Widgets (can be shared by multiple sections)
+    | `-main.js                     - Entry-point for whole App (usually the only script in js folder)
+    |~rest/                     - REST services 
+    |-.jshintrc                 - node-jshint settings
+    |-.livereload               - Livereload settings
+    |-build.xml                 - Ant build script
+    `-index.html                - Base HTML file
+```
+
+
+
+## Build ##
+
+This project uses [Apache Ant](http://ant.apache.org/) for the build process. Install Ant and run:
+
+    cd dev/site
+    ant all
+
+This will delete all files inside the `deploy/site` folder, merge/update/compress 
+source files and copy output to `deploy/site` folder.
+
+The only reason why I'm not using Node.js for the build step is because it is
+hard to install it on Windows, different versions may have different API, and 
+Ant is already integrated into some IDEs, so it is easier for other devs to 
+use it and find info on the web. - Most times that I wanted to do something
+different using Ant I just had to search "*thing that I want* Ant task" and
+Google gave me the proper result...
+
+
+
+## License ##
+
+Released under the [WTFPL](http://sam.zoy.org/wtfpl/).
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="MM_boilerplate" default="" basedir=".">
+    
+    <!-- properties -->
+    
+    <property file="_build/build.properties" />
+    
+    <!-- custom tasks -->
+    
+    
+    <!-- targets -->
+    
+    <target name="-mkdirs" description="Make required dirs.">
+        <mkdir dir="${deploy.dir}" />
+    </target>
+    
+    <target name="purgeDeploy" depends="-mkdirs" description="Delete old deploy files.">
+        <delete includeEmptyDirs="true">
+            <fileset dir="${deploy.dir}">
+                <include name="**" />
+                <exclude name="**/.svn" />
+            </fileset>
+        </delete>
+        <antcall target="-mkdirs" />
+    </target>
+    
+    <target name="-optimize" description="Combine and minify files.">
+        <java classname="org.mozilla.javascript.tools.shell.Main">
+            <classpath>
+                <pathelement location="${rhino.jar}" />
+                <pathelement location="${closure.jar}" />
+            </classpath>
+            <arg value="${r.js}"/>
+            <arg value="-o"/>
+            <arg value="${requirejs.optimizer.settings}"/>
+        </java>
+        <echo message="optimized ${requirejs.optimizer.settings}" />
+    </target>
+    
+    <target name="optimizeJS">
+        <echo message="Combining and minifying JS files." />
+        <antcall target="-optimize">
+            <param name="requirejs.optimizer.settings" value="${js_build_settings}" />
+        </antcall>
+    </target>
+    
+    <target name="optimizeCSS">
+        <echo message="Combining and compressing CSS files." />
+        <antcall target="-optimize">
+            <param name="requirejs.optimizer.settings" value="${css_build_settings}" />
+        </antcall>
+    </target>
+    
+    <target name="copyToDeploy" depends="-mkdirs">
+        <copy todir="${deploy.dir}">
+            <fileset dir="${basedir}">
+                <include name="**" />
+                <exclude name="**/_*/**" /> <!-- ignore files/folders starting with underscore -->
+                <exclude name="**/.svn" />
+                <exclude name="**/.git" />
+                <exclude name="**/.hg" />
+                <exclude name="**/.DS_Store" />
+                <exclude name="**/.tmp*" />
+                <exclude name="**/.project" />
+                <exclude name="**/.livereload" />
+                <exclude name="**/.jshintrc" />
+                <exclude name="**/.settings/**" />
+                <exclude name="js/**" /> <!-- js will be copied by optimizer -->
+                <exclude name="build.xml" />
+            </fileset>
+        </copy>
+        <echo message="Files copied to deploy." />
+    </target>
+    
+    <target name="-rev" description="Update build number to avoid caching old JS/CSS files">
+        <buildnumber file="${build.dir}/build.number" />
+        <replaceregexp match="((\.css|\.js)\?v=|'v=)[0-9]+" replace="\1${build.number}" flags="g"> <!-- update only .css and .js files and the urlArgs -->
+            <fileset dir="${deploy.dir}">
+                <include name="*.php" />
+                <include name="*.html" />
+            </fileset>
+        </replaceregexp>
+        <echo message="updated revision number." />
+    </target>
+
+    <target name="all" depends="purgeDeploy, copyToDeploy, optimizeJS, optimizeCSS, -rev">
+        <echo message="Build Complete." />
+    </target>
+    
+</project>

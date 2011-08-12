@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- TODO: set title and description -->
+        <title></title>
+        <meta name="description" content="">
+        
+        <!-- TODO: set Facebook open-graph data
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:image" content="" />
+        <meta property="og:site_name" content="" />
+        <meta property="og:description" content="" />
+        -->
+
+        <!-- TODO: add favicon and apple-touch-icons 
+            Place favicon.ico (16x16px) and apple-touch-icon-precomposed.png (72x72px) in the root directory: mathiasbynens.be/notes/touch-icons 
+            if not possible:
+            <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+            <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png">
+        -->
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="css/main.css?v=1">
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script>
+            //remove "no-js" classname from <html> element (not required if using modernizr)
+            (function(){
+                var h = document.documentElement;
+                h.className = h.className.replace(/\bno-js\b/, '');
+            })();
+
+            //google analytics asynch snippet
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'XX-XXXX-XX']); //TODO: update GA account
+            _gaq.push(['_trackPageview']);
+            _gaq.push(['_trackPageLoadTime']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <div id="wrapper">
+
+        </div>
+
+        <script>
+            //config RequireJS before loading main.js for versioning/cache control
+            //outside main.js since we update "urlArgs" during build process
+            var require = {
+                urlArgs : 'v=1'
+            };
+        </script>
+        <script data-main="js/main.js" src="js/lib/require/require.js"></script>
+
+        <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+            chromium.org/developers/how-tos/chrome-frame-getting-started -->
+        <!--[if lt IE 7 ]>
+        <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+        <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->        
+
+    </body>
+</html>

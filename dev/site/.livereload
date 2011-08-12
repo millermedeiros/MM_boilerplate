@@ -1,0 +1,16 @@
+# additional extensions to monitor
+config.exts << 'mustache'
+config.exts << 'xml'
+config.exts << 'json'
+
+# exclude files with NAMES matching this mask
+config.exclusions << '_*'
+config.exclusions << '/_*/*'
+
+# reload the whole page on file changes 
+config.apply_js_live = false
+config.apply_css_live = false
+config.apply_images_live = false
+
+# wait 500ms for more changes before reloading a page
+config.grace_period = 0.5
