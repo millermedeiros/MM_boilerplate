@@ -83,7 +83,7 @@
         <echo message="updated revision number." />
     </target>
 
-    <target name="all" depends="purgeDeploy, copyToDeploy, optimizeJS, optimizeCSS, -rev">
+    <target name="deploy" depends="purgeDeploy, copyToDeploy, optimizeJS, optimizeCSS, -rev">
         <echo message="Build Complete." />
     </target>
     

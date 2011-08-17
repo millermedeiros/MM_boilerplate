@@ -30,7 +30,7 @@
     //configure RequireJS
     //IMPORTANT: remember to also update paths config inside "_build/js_build.js"
 
-    require({ 
+    require.config({
         paths : { 
             // folders (for brevity)
             'jq' : 'lib/jquery',
@@ -52,7 +52,7 @@
 //>>includeEnd("cacheBust"); 
         waitSeconds: (IS_LOCAL? 2 : 15), //fail early if local
         priority : [
-            'jquery'
+            'jquery' //load/execute jquery before other dependencies
         ]
     });
 

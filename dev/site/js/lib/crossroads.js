@@ -1,16 +1,14 @@
-/**
- * @license 
- * Crossroads - JavaScript Routes
- * Released under the MIT license <http://www.opensource.org/licenses/mit-license.php>
+/** @license
+ * Crossroads.js <http://millermedeiros.github.com/crossroads.js>
+ * Released under the MIT license
  * Author: Miller Medeiros
- * Version: 0.4.0+
- * Build: 40 (06/28/2011 05:24 PM)
+ * Version 0.5.0+ - Build: 60 (2011/08/17 12:09 PM)
  */
+
 define(['signals'], function(signals){
         
     var crossroads,
         patternLexer,
-        _toString = Object.prototype.toString,
         BOOL_REGEXP = /^(true|false)$/i;
     
     // Helpers -----------
@@ -26,7 +24,7 @@ define(['signals'], function(signals){
     }
     
     function isType(type, val){
-        return '[object '+ type +']' === _toString.call(val);
+        return '[object '+ type +']' === Object.prototype.toString.call(val);
     }
     
     function isRegExp(val){
@@ -49,7 +47,7 @@ define(['signals'], function(signals){
                 );
     }
 
-    function typecastValues(values){
+    function typecastArrayValues(values){
         var n = values.length, 
             result = [];
         while(n--){
@@ -62,6 +60,9 @@ define(['signals'], function(signals){
     // Crossroads --------
     //====================
     
+    /**
+     * @constructor
+     */
     function Crossroads(){
         this._routes = [];
         this.bypassed = new signals.Signal();
@@ -99,7 +100,7 @@ define(['signals'], function(signals){
         parse : function(request){
             request = request || '';
             var route = this._getMatchedRoute(request),
-                params = route? patternLexer.getParamValues(request, route._matchRegexp, this.shouldTypecast) : null;
+                params = route? route._getParamsArray(request) : null;
             if(route){
                 params? route.matched.dispatch.apply(route.matched, params) : route.matched.dispatch();
                 this.routed.dispatch(request, route, params);
@@ -112,7 +113,7 @@ define(['signals'], function(signals){
             return this._routes.length;
         },
 
-        _sortedInsert : function (route){
+        _sortedInsert : function(route){
             //simplified insertion sort
             var routes = this._routes,
                 n = routes.length;
@@ -120,7 +121,7 @@ define(['signals'], function(signals){
             routes.splice(n+1, 0, route);
         },
         
-        _getMatchedRoute : function (request){
+        _getMatchedRoute : function(request){
             var routes = this._routes,
                 n = routes.length,
                 route;
@@ -142,7 +143,10 @@ define(['signals'], function(signals){
             
     // Route --------------
     //=====================
-     
+    
+    /**
+     * @constructor
+     */
     function Route(pattern, callback, priority, router){
         var isRegexPattern = isRegExp(pattern);
         this._router = router;
@@ -164,18 +168,18 @@ define(['signals'], function(signals){
         
         _validateParams : function(request){
             var rules = this.rules, 
+                values = this._getParamValuesObject(request),
                 prop;
             for(prop in rules){
-                if(rules.hasOwnProperty(prop) && ! this._isValidParam(request, prop)){ //filter prototype
+                if(rules.hasOwnProperty(prop) && ! this._isValidParam(request, prop, values)){ //filter prototype
                     return false;
                 }
             }
             return true;
         },
         
-        _isValidParam : function(request, prop){
+        _isValidParam : function(request, prop, values){
             var validationRule = this.rules[prop],
-                values = this._getParamValuesObject(request),
                 val = values[prop],
                 isValid;
             
@@ -194,15 +198,29 @@ define(['signals'], function(signals){
         
         _getParamValuesObject : function(request){
             var shouldTypecast = this._router.shouldTypecast,
-                ids = this._paramsIds,
                 values = patternLexer.getParamValues(request, this._matchRegexp, shouldTypecast),
                 o = {}, 
-                n = ids? ids.length : 0;
+                n = values.length;
             while(n--){
-                o[ids[n]] = values[n];
+                o[n] = values[n]; //for RegExp pattern and also alias to normal paths
+                if(this._paramsIds){
+                    o[this._paramsIds[n]] = values[n];
+                }
             }
             o.request_ = shouldTypecast? typecastValue(request) : request;
             return o;
+        },
+
+        _getParamsArray : function(request){
+            var vals = this._getParamValuesObject(request),
+                norm = this.rules? this.rules.normalize_ : null,
+                params;
+            if(isFunction(norm)){
+                params = norm(request, vals);
+            } else {
+                params = patternLexer.getParamValues(request, this._matchRegexp, this._router.shouldTypecast);
+            }
+            return params;
         },
                 
         dispose : function(){
@@ -229,7 +247,7 @@ define(['signals'], function(signals){
         
         var ESCAPE_CHARS_REGEXP = /[\\.+*?\^$\[\](){}\/'#]/g, //match chars that should be escaped on string regexp
             UNNECESSARY_SLASHES_REGEXP = /\/$/g, //trailing slash
-            OPTIONAL_SLASHES_REGEXP = /([:}])\/?(:)/g, //slash between `::` or `}:`. $1 = before, $2 = after
+            OPTIONAL_SLASHES_REGEXP = /([:}]|\w(?=\/))\/?(:)/g, //slash between `::` or `}:` or `\w:`. $1 = before, $2 = after
 
             REQUIRED_PARAMS_REGEXP = /\{([^}]+)\}/g, //match everything between `{ }`
             OPTIONAL_PARAMS_REGEXP = /:([^:]+):/g, //match everything between `: :`
@@ -280,7 +298,7 @@ define(['signals'], function(signals){
             if(vals){
                 vals.shift();
                 if(shouldTypecast){
-                    vals = typecastValues(vals);
+                    vals = typecastArrayValues(vals);
                 }
             }
             return vals;
