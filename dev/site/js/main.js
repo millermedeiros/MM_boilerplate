@@ -23,7 +23,7 @@
 //closure, avoid polluting global scope
 (function(){
 
-    var IS_LOCAL = (document.location.href.search(/(:\/\/localhost|file:\/\/)/) !== -1);
+    var IS_LOCAL = /(:\/\/localhost|file:\/\/)/.test(document.location.href);
 
     //CONFIG
     //---------
@@ -50,7 +50,7 @@
 //>>includeStart("cacheBust", pragmas.cacheBust);
         urlArgs: 'bust=' + (new Date()).getTime(), //cache bust during development, will be deleted during build!
 //>>includeEnd("cacheBust"); 
-        waitSeconds: (IS_LOCAL? 2 : 15), //fail early if local
+        waitSeconds: (IS_LOCAL? 2 : 45), //fail early if local
         priority : [
             'jquery' //load/execute jquery before other dependencies
         ]
