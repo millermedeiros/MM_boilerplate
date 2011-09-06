@@ -66,6 +66,7 @@
                 <exclude name="**/.jshintrc" />
                 <exclude name="**/.settings/**" />
                 <exclude name="js/**" /> <!-- js will be copied by optimizer -->
+                <!-- <exclude name="css/**" /> exclude css if optimizing only a single file -->
                 <exclude name="build.xml" />
             </fileset>
         </copy>

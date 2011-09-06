@@ -1,7 +1,7 @@
 /**
  * @license
  * This site uses many modules from Miller Medeiros JS Library <https://github.com/millermedeiros/MM_js_lib/> which is Released under the MIT license.
- * 
+ *
  * =====
  * Any code that isn't explicitly credited as open-source shouldn't be used without previous authorization.
  * =====
@@ -13,10 +13,11 @@
 //>>includeStart("debug", pragmas.debug);
 
 // make it safe to use console.log always (borrowed from HTML5 Boilerplate and linted)
+// it will be deleted during build!
 (function(b){function c(){}for(var d="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,timeStamp,profile,profileEnd,time,timeEnd,trace,warn".split(","),a;a=d.pop();){b[a]=b[a]||c;}}((function(){try
 {console.log();return window.console;}catch(err){return (window.console={});}}())));
 
-//>>includeEnd("debug"); 
+//>>includeEnd("debug");
 
 
 
@@ -25,10 +26,10 @@
 
     var IS_LOCAL = /(:\/\/localhost|file:\/\/)/.test(document.location.href);
 
-    //CONFIG
-    //---------
-    //configure RequireJS
-    //IMPORTANT: remember to also update paths config inside "_build/js_build.js"
+    // CONFIG
+    // ---------
+    // configure RequireJS
+    // IMPORTANT: remember to also update paths config inside "_build/js_build.js"
 
     require.config({
         paths : { 
@@ -36,7 +37,7 @@
             'jq' : 'lib/jquery',
             'mm' : 'lib/millermedeiros',
             // libs
-            'jquery' : (IS_LOCAL? 'lib/jquery/jquery' : 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min'), //load from CDN if not local
+            'jquery' : 'lib/jquery/jquery', //not loading jquery from CDN because of: http://groups.google.com/group/requirejs/t/c0e4806b6e5deb16
             'mustache' : 'lib/mustache',
             'signals' : 'lib/signals',
             'crossroads' : 'lib/crossroads',
@@ -69,11 +70,11 @@
     define(
         [
             'jquery'
-        ], 
-        function ($){ 
+        ],
+        function ($){
 
             function init(){
-                //start you application inside this function
+                //initialize application
                 console.log('Initialized application.');
             }
 
