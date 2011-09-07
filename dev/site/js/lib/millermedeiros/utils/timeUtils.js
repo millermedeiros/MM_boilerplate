@@ -26,7 +26,7 @@ define(function(){
          * Parse timestamp into an object.
          * IMPORTANT: it doesn't handle Weeks, Months and Years.
          * @param {number} ms   Miliseconds
-         * @return {{miliseconds:number, seconds:number, minutes:number, hours:number, days:number)}
+         * @return {{miliseconds:number, seconds:number, minutes:number, hours:number, days:number}}
          */
         split : function(ms){
             var time = {

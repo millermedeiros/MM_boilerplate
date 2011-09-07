@@ -4,28 +4,43 @@
 
 ({
     appDir : '../js',
-	baseUrl: '../js',
-	dir: '../../../deploy/site/js',
+    baseUrl: '../js',
+    dir: '../../../deploy/site/js',
     optimize : 'closure',
     //optimize : 'uglify',
     //optimize : "none",
-	inlineText: true,
+    inlineText: true,
     pragmas : {
         debug : false,
-        cacheBust : false
+        cacheBust : false,
+        asynchLoader: true, //for dojo build
+        amdLoader : true //for dojo build
     },
+    packages: [
+        {
+            'name' : 'dojo',
+            'location' : 'lib/dojo',
+            'main' : 'lib/main-browser',
+            'lib' : '.'
+        },
+        {
+            'name' : 'dijit',
+            'location' : 'lib/dijit',
+            'main' : 'lib/main',
+            'lib' : '.'
+        }
+    ],
     paths : {
         // folders (for brevity)
-        'jq' : 'lib/jquery',
         'mm' : 'lib/millermedeiros',
         // libs
-        'jquery' : 'lib/jquery/jquery',
         'mustache' : 'lib/mustache',
         'signals' : 'lib/signals',
         'crossroads' : 'lib/crossroads',
         'hasher' : 'lib/hasher',
         // requirejs plugins
         'text' : 'lib/require/text',
+        'i18n' : 'lib/require/i18n',
         'async' : 'lib/millermedeiros/require/async',
         'ext' : 'lib/millermedeiros/require/ext',
         'img' : 'lib/millermedeiros/require/image'
@@ -34,7 +49,7 @@
         {
             name : 'main',
             include : [],
-            exclude : ['jquery']
+            exclude : []
         }
     ]
 })

@@ -20,6 +20,11 @@
 @import url(core/structure.css);
 
 /*
+  DIJIT
+*/
+@import url(../js/lib/dijit/themes/tundra/tundra.css);
+
+/*
   WIDGETS
 */
 @import url(widgets/lists.css);

@@ -32,29 +32,40 @@
     // IMPORTANT: remember to also update paths config inside "_build/js_build.js"
 
     require.config({
-        paths : { 
+        packages: [
+            {
+                'name' : 'dojo',
+                'location' : 'lib/dojo',
+                'main' : 'lib/main-browser',
+                'lib' : '.'
+            },
+            {
+                'name' : 'dijit',
+                'location' : 'lib/dijit',
+                'main' : 'lib/main',
+                'lib' : '.'
+            }
+        ],
+        paths : {
             // folders (for brevity)
-            'jq' : 'lib/jquery',
             'mm' : 'lib/millermedeiros',
             // libs
-            'jquery' : 'lib/jquery/jquery', //not loading jquery from CDN because of: http://groups.google.com/group/requirejs/t/c0e4806b6e5deb16
             'mustache' : 'lib/mustache',
             'signals' : 'lib/signals',
             'crossroads' : 'lib/crossroads',
             'hasher' : 'lib/hasher',
             // requirejs plugins
             'text' : 'lib/require/text',
+            'i18n' : 'lib/require/i18n',
             'async' : 'lib/millermedeiros/require/async',
             'ext' : 'lib/millermedeiros/require/ext',
             'img' : 'lib/millermedeiros/require/image'
         },
 //>>includeStart("cacheBust", pragmas.cacheBust);
         urlArgs: 'bust=' + (new Date()).getTime(), //cache bust during development, will be deleted during build!
-//>>includeEnd("cacheBust"); 
-        waitSeconds: (IS_LOCAL? 2 : 45), //fail early if local
-        priority : [
-            'jquery' //load/execute jquery before other dependencies
-        ]
+//>>includeEnd("cacheBust");
+        waitSeconds: (IS_LOCAL? 5 : 45), //fail early if local
+        priority : []
     });
 
 
@@ -63,22 +74,29 @@
     // INIT
     // ---------
     // main.js is used only for settings and initializing application, all heavy
-    // logic is stored inside proper modules, it makes it easy to require core 
-    // modules from inside the application and also keeps main.js small since 
+    // logic is stored inside proper modules, it makes it easy to require core
+    // modules from inside the application and also keeps main.js small since
     // settings adds too much noise to the real code.
 
     define(
         [
-            'jquery'
+            'dojo',
+            'dijit/dijit',
+            'dijit/Calendar'
         ],
-        function ($){
+        function (dojo, dijit, Calendar){
 
             function init(){
+                //just to show how to use a dijit and test that it is working
+                //properly
+                var calendar = new dijit.Calendar({}, dojo.byId("wrapper"));
+                dojo.body().className += ' tundra';
+
                 //initialize application
                 console.log('Initialized application.');
             }
 
-            $(document).ready(init);
+            dojo.ready(init);
 
         }
     );
