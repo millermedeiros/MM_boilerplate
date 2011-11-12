@@ -7,6 +7,10 @@ echo "\n -- updating signals.js --\n"
 curl https://raw.github.com/millermedeiros/js-signals/master/dist/signals.js > dev/site/js/lib/signals.js
 
 
+echo "\n -- updating CompoundSignal.js --\n"
+curl https://raw.github.com/millermedeiros/CompoundSignal/master/src/CompoundSignal.js > dev/site/js/lib/CompoundSignal.js
+
+
 echo "\n -- updating hasher.js --\n"
 curl https://raw.github.com/millermedeiros/Hasher/master/dist/js/hasher.js > dev/site/js/lib/hasher.js
 
@@ -69,7 +73,7 @@ rmdir dev/site/js/lib/amd-utils/src/
 echo "\n -- updating MM_js_lib --\n"
 rm -rf dev/site/js/lib/millermedeiros
 git clone https://github.com/millermedeiros/MM_js_lib.git dev/site/js/lib/millermedeiros
-rm -rf dev/site/js/lib/millermedeiros/.git/ dev/site/js/lib/millermedeiros/lib/ dev/site/js/lib/millermedeiros/tests/
+rm -rf dev/site/js/lib/millermedeiros/.git/ dev/site/js/lib/millermedeiros/lib/ dev/site/js/lib/millermedeiros/tests/ dev/site/js/lib/millermedeiros/src/_deprecated/
 rm dev/site/js/lib/millermedeiros/.gitignore dev/site/js/lib/millermedeiros/.gitmodules dev/site/js/lib/millermedeiros/.jshintrc
 mv dev/site/js/lib/millermedeiros/src/* dev/site/js/lib/millermedeiros/
 rmdir dev/site/js/lib/millermedeiros/src/
