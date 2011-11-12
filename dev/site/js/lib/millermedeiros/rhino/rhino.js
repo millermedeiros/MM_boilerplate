@@ -17,20 +17,20 @@ millermedeiros.rhino = {
      * @param {boolean} [isSilent]  If it shouldn't output name of files deleted.
      */
     purgeFolder : function(folder, ignoreFilter, isSilent){
-
+        
         ignoreFilter = ignoreFilter || /^$/; //match empty string
-
-        var
+        
+        var 
             list = folder.listFiles(),
             current,
             n = list.length,
             success;
-
+            
         while(n--){
             current = new File(list[n]);
-
+            
             if(ignoreFilter.test(current)) continue; //skip if file match filter
-
+            
             if(current.isFile()){
                 success = current['delete']();
             }else if(current.isDirectory()){
@@ -39,17 +39,17 @@ millermedeiros.rhino = {
                     success = current['delete'](); //can only delete empty folder
                 }
             }
-
+            
             if(! isSilent){
                 (success)? print('deleted: '+ current) : print('can\'t delete: '+ current);
             }
-
+            
         }
     },
-
+    
     /**
      * Write data to a file.
-     * - will create file and parent directories if file/folders doesn't exist.
+     * - will create file and parent directories if file/folders doesn't exist. 
      * @param {java.io.File} file   File Object.
      * @param {string} data
      * @return {boolean} success.
@@ -58,21 +58,21 @@ millermedeiros.rhino = {
         var tmpDir,
             writer,
             success;
-
+        
         //create required dirs and file if it doesn't exist
         if(! file.exists()){
             tmpDir = file.getParentFile();
             if(! tmpDir.exists()) tmpDir.mkdirs();
             file.createNewFile();
         }
-
+        
         writer = new FileWriter(file);
         success = writer.write(data);
         writer.close();
-
+        
         return success;
     },
-
+    
     /**
      * Sanitize path slashes to system slashes
      * @param {string} path
@@ -81,5 +81,5 @@ millermedeiros.rhino = {
     sanitizePath : function(path){
         return path.replace(/\/|\\/, File.separator);
     }
-
+    
 };

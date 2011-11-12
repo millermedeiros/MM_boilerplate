@@ -47,7 +47,7 @@ var win = {
     getDocumentWidth : function(){
         return Math.max(document.documentElement.scrollWidth, this.getInnerWidth());
     },
-
+    
     /**
      * Get total height of the document
      * @return {int} document height
@@ -55,7 +55,7 @@ var win = {
     getDocumentHeight : function(){
         return Math.max(document.documentElement.scrollHeight, this.getInnerHeight());
     }
-
+    
 };
 
 return win;

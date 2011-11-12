@@ -32,10 +32,11 @@
     // IMPORTANT: remember to also update paths config inside "_build/js_build.js"
 
     require.config({
-        paths : { 
+        paths : {
             // folders (for brevity)
             'jq' : 'lib/jquery',
             'mm' : 'lib/millermedeiros',
+            'amd-utils' : 'lib/amd-utils',
             // libs
             'jquery' : 'lib/jquery/jquery', //not loading jquery from CDN because of: http://groups.google.com/group/requirejs/t/c0e4806b6e5deb16
             'mustache' : 'lib/mustache',
@@ -44,13 +45,14 @@
             'hasher' : 'lib/hasher',
             // requirejs plugins
             'text' : 'lib/require/text',
-            'async' : 'lib/millermedeiros/require/async',
-            'ext' : 'lib/millermedeiros/require/ext',
-            'img' : 'lib/millermedeiros/require/image'
+            'async' : 'lib/require/async',
+            'json' : 'lib/require/json',
+            'noext' : 'lib/require/noext',
+            'img' : 'lib/require/image'
         },
 //>>includeStart("cacheBust", pragmas.cacheBust);
-        urlArgs: 'bust=' + (new Date()).getTime(), //cache bust during development, will be deleted during build!
-//>>includeEnd("cacheBust"); 
+        urlArgs: 'bust='+ (new Date()).getTime(), //cache bust during development, will be deleted during build!
+//>>includeEnd("cacheBust");
         waitSeconds: (IS_LOCAL? 2 : 45), //fail early if local
         priority : [
             'jquery' //load/execute jquery before other dependencies
@@ -63,8 +65,8 @@
     // INIT
     // ---------
     // main.js is used only for settings and initializing application, all heavy
-    // logic is stored inside proper modules, it makes it easy to require core 
-    // modules from inside the application and also keeps main.js small since 
+    // logic is stored inside proper modules, it makes it easy to require core
+    // modules from inside the application and also keeps main.js small since
     // settings adds too much noise to the real code.
 
     define(

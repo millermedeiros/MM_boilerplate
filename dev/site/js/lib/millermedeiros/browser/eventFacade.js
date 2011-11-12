@@ -24,7 +24,7 @@ var eventFacade = {
             elm['on' + eType] = fn;
         }
     },
-
+    
     /**
     * Removes DOM Event Listener
     * @param {Element} elm Element.
@@ -96,7 +96,7 @@ var eventFacade = {
         eventFacade.stopPropagation(evt);
         eventFacade.preventDefault(evt);
     }
-
+    
 };
 
 return eventFacade;

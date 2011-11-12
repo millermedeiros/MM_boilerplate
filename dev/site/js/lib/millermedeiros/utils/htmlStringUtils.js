@@ -7,7 +7,7 @@ define(function(){
  * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
  */
 var htmlUtils = {
-
+    
     /**
      * Convert line breaks into 'br' tags (same as PHP nl2br)
      * @param {string} str
@@ -18,18 +18,18 @@ var htmlUtils = {
         var br = (isXHTML !== false)? '<br />' : '<br>';
         return str.replace(/\n/g, br+'\n');
     },
-
+    
     /**
      * Wrap each line with and XML tag
      * - ported from Miller Medeiros Eclipse Monkey Script Wrap Lines in Tag
      * @param {string} str
      * @param {string} tagName
-     * @return {string}
+     * @return {string} 
      */
     wrapLinesInTag : function(str, tagName){
         return str.replace(/([^\t\n\r]+)([\n\r]+|$)/g, '<'+ tagName +'>$1</'+ tagName +'>$2');
     },
-
+    
     /**
      * Remove HTML tags from string.
      * @param {string} str
@@ -38,25 +38,25 @@ var htmlUtils = {
     stripHtmlTags : function(str){
         return str.replace(/<[^>]*>/g, '');
     },
-
+    
     /**
      * Convert all applicable characters to HTML entities
      * - based on Miller Medeiros Eclipse Monkey Scripts
      * @param {string} str
-     * @param {boolean} ignoreHtmlTags  if it should keep HTML tags and attributes.
+     * @param {boolean} ignoreHtmlTags  if it should keep HTML tags and attributes. 
      * @return {string}
      */
     htmlEntityEncode : function(str, ignoreHtmlTags){
-
-        var
+        
+        var 
             tmpArr,
-
+        
             tagPattern = /(<[^>]+>)/g, //will match XML tags. capturing group is required for split.
-
+            
             i,
-
+            
             n,
-
+        
             //encode special chars
             encode = function(str){
                 //entities copied from Wikipedia ( http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Character_entity_references_in_HTML )
@@ -317,9 +317,9 @@ var htmlUtils = {
                             .replace(/\u2665/g, "&hearts;")
                             .replace(/\u2666/g, "&diams;");
             };
-
+        
         if (! ignoreHtmlTags){
-            return encode(str);
+            return encode(str); 
         }else{
             tmpArr = str.split(tagPattern);
             n = tmpArr.length;
@@ -328,9 +328,9 @@ var htmlUtils = {
             }
             return tmpArr.join('');
         }
-
+        
     }
-
+    
 };
 
 

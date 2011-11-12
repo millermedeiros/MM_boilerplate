@@ -7,7 +7,7 @@ define(function(){
  * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
  */
 var minifier = {
-
+    
     /**
      * Compress HTML file (Strip comments, remove tabs and line breaks).
      * - <strong>IMPORTANT:</strong> comments inside 'script' and 'style' tags may produce undesired output.
@@ -29,7 +29,7 @@ var minifier = {
         str = (! removeMultipleSpaces)? str : str.replace(/ {2,}/g, ' '); //convert multiple spaces into single spaces
         return str;
     },
-
+    
     /**
      * @param {string} str  CSS string.
      * @return {string} CSS string without comments, line breaks and unnecessary spaces
@@ -45,7 +45,7 @@ var minifier = {
                 .replace(/(\:|\,| |\(|\-)0\./g, "$1.") //remove leading zero on fractional number smaller than 1
                 .replace(/[\n\r]+/gm, ""); //remove line breaks
     }
-
+    
 };
 
 return minifier;

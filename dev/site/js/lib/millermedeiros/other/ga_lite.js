@@ -5,19 +5,19 @@
  * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
  */
 millermedeiros.ga = {
-
+    
     /**
      * URI of the GA pixel image, if using mobile GA set it to your ga.php or ga.aspx file otherwise leave it as the default.
      * @type string
      */
     GA_PIXEL : 'http://www.google-analytics.com/__utm.gif',
-
+    
     /**
      * GA account ID
      * @type string
      */
     GA_ACCOUNT : '',
-
+    
     /**
      * Get blank gif URL used for tracking, very basic implementation of GA.js, similar features than mobile script.
      * @param {string} accountId    Google Analytics account ID.
@@ -33,7 +33,7 @@ millermedeiros.ga = {
         url += '&utmp='+ escape(pageId);
         return url;
     },
-
+    
     /**
      * track event
      * @param {string} accountId    GA account ID.
@@ -49,5 +49,5 @@ millermedeiros.ga = {
             console.warn('Failed to create tracking pixel.');
         }
     }
-
+    
 };

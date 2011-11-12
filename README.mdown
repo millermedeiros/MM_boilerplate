@@ -5,21 +5,21 @@ Starting point for some of my projects. Already includes libraries and files
 that I use often and some boilerplate code. **This structure is targetted for
 mid-size to large projects** (10K+ JS LOC, 2K+ CSS LOC)
 
-You should consider using [HTML5 Boilerplate](http://html5boilerplate.com/) 
-instead of my boilerplate since it's broadly used, have proper documentation, 
-lots of contributors, etc... The only reason I'm not using it is because it 
-doesn't fit my current workflow.. - I like AMD modules and been using 
-RequireJS optimizer to combine my JavaScript and CSS files, I'm also 
-splitting my CSS across multiple files and have a 
-[base CSS framework](https://github.com/millermedeiros/basis.css) that I use 
-on most projects. Even if I used HTML5 Boilerplate I would still need to 
+You should consider using [HTML5 Boilerplate](http://html5boilerplate.com/)
+instead of my boilerplate since it's broadly used, have proper documentation,
+lots of contributors, etc... The only reason I'm not using it is because it
+doesn't fit my current workflow.. - I like AMD modules and been using
+RequireJS optimizer to combine my JavaScript and CSS files, I'm also
+splitting my CSS across multiple files and have a
+[base CSS framework](https://github.com/millermedeiros/basis.css) that I use
+on most projects. Even if I used HTML5 Boilerplate I would still need to
 spend some time tweaking it for my needs so it's better to just treat it as
 a separate thing...
 
 Not sure how far I will keep using this structure and even if this repository
 makes any sense since I'm constantly changing things and every project have
 different needs but I used a similar structure on the past few projects and it
-worked really well... Maybe I will even create different branches for different 
+worked really well... Maybe I will even create different branches for different
 kinds of projects and some sample JS code for the core structure of single
 page apps and normal HTML sites. - let's see how things goes...
 
@@ -28,7 +28,7 @@ page apps and normal HTML sites. - let's see how things goes...
 PS: It doesn't come with any server settings files, use [html5-bolierplate server
 configs](https://github.com/paulirish/html5-boilerplate-server-configs)
 
-PS2: I'm borrowing many things from HTML5 Boilerplate but some 
+PS2: I'm borrowing many things from HTML5 Boilerplate but some
 things are just coincidence, I will try to give credits whenever possible and
 copy some useful stuff that is still missing (like optimizing images), but will
 try to keep it simple.
@@ -37,8 +37,8 @@ try to keep it simple.
 
 ## Files/Folder Structure ##
 
-Since it is common to have multiple "apps" and many developers working for the 
-same project/client I create a new folder for each "app" like *site*, *mobile*, 
+Since it is common to have multiple "apps" and many developers working for the
+same project/client I create a new folder for each "app" like *site*, *mobile*,
 *facebook_tab*, *iphone_app*, *video_player*, etc..
 
 
@@ -72,7 +72,7 @@ MM_boilerplate
     | |+sections/                   - Scripts specific to each section/page/template
     | |+widgets/                    - Components/Widgets (can be shared by multiple sections)
     | `-main.js                     - Entry-point for whole App (usually the only script in js folder)
-    |~rest/                     - REST services 
+    |~rest/                     - REST services
     |-.jshintrc                 - node-jshint settings
     |-.livereload               - Livereload settings
     |-build.xml                 - Ant build script
@@ -83,13 +83,13 @@ MM_boilerplate
 ### Important ###
 
 **This structure may be overkill for simple projects**, there is no need to split
-CSS and JS into multiple files if your files aren that big. I usually try to keep 
-my JS source files under 200 LOC and CSS under 300 LOC, to avoid scrolling and 
+CSS and JS into multiple files if your files aren that big. I usually try to keep
+my JS source files under 200 LOC and CSS under 300 LOC, to avoid scrolling and
 also to split things by concerns (making it easier to understand and maintain).
 
 If you are coding a simple project consider deleting child folders of `css/`
 and using [normalize.css](http://necolas.github.com/normalize.css/) instead of
-[basis.css](https://github.com/millermedeiros/basis.css) - basis is only really 
+[basis.css](https://github.com/millermedeiros/basis.css) - basis is only really
 helpful for large projects with many unique templates or if your project
 wouldn't benefit that much from base styles for each tag.
 
@@ -102,15 +102,35 @@ This project uses [Apache Ant](http://ant.apache.org/) for the build process. In
     cd dev/site
     ant deploy
 
-This will delete all files inside the `deploy/site` folder, merge/update/compress 
+This will delete all files inside the `deploy/site` folder, merge/update/compress
 source files and copy output to `deploy/site` folder.
 
 The only reason why I'm not using Node.js for the build step is because it is
-hard to install it on Windows, different versions may have different API, and 
-Ant is already integrated into some IDEs, so it is easier for other devs to 
+hard to install it on Windows, different versions may have different API, and
+Ant is already integrated into some IDEs, so it is easier for other devs to
 use it and find info on the web. - Most times that I wanted to do something
 different using Ant I just had to search "*thing that I want* Ant task" and
 Google gave me the proper result...
+
+
+
+## Updating 3rd-party libs ##
+
+The boilerplate uses many third-party libs (jQuery, RequireJS, amd-utils,
+mustache.js, hasher, crossroads, js-signals, etc...) to update them run:
+
+    sh update.sh
+
+Beware that it will delete/replace the old files, use with caution. I recommend
+even deleting the file after first update to avoid problems.
+
+Not using git *submodules* or *sparse checkout* since they aren't flexible
+enough, most repositories have lots of test files and other stuff that isn't
+needed...
+
+I was going to create an Ant task to update the libs (so it would run on
+windows as well) but the bash script is way more concise and I don't think
+anyone else is using these files anyway.
 
 
 
