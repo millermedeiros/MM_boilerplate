@@ -43,6 +43,7 @@
             'signals' : 'lib/signals',
             'crossroads' : 'lib/crossroads',
             'hasher' : 'lib/hasher',
+            'CompoundSignal' : 'lib/CompoundSignal',
             // requirejs plugins
             'text' : 'lib/require/text',
             'async' : 'lib/require/async',
@@ -55,7 +56,7 @@
 //>>includeEnd("cacheBust");
         waitSeconds: (IS_LOCAL? 2 : 45), //fail early if local
         priority : [
-            'jquery' //load/execute jquery before other dependencies
+            // 'jquery' //load/execute jquery before other dependencies
         ]
     });
 
@@ -71,14 +72,33 @@
 
     define(
         [
-            'jquery'
+            'jquery',
+            'mm/other/sectionController',
+            'core/ui',
+            'core/sectionLogger',
+            'sections/sections'
         ],
-        function ($){
+        function ($, sectionController, ui, sectionLogger, sections){
 
-            function init(){
+            function init() {
+                console.log('[main.init]');
+
+                ui.init();
+
+                //if you don't want to log all the events from the section
+                //controller comment this line
+                sectionLogger.init();
+
                 //initialize application
-                console.log('Initialized application.');
+                sectionController.DEFAULT_HASH = 'home';
+
+                //if true start next section without waiting the previous one to end
+                //section.isAsync will override this setting
+                sectionController.DEFAULT_ASYNC = false;
+
+                sectionController.init(sections);
             }
+
 
             $(document).ready(init);
 

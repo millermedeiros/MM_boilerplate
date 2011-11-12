@@ -25,6 +25,7 @@
         'signals' : 'lib/signals',
         'crossroads' : 'lib/crossroads',
         'hasher' : 'lib/hasher',
+        'CompoundSignal' : 'lib/CompoundSignal',
         // requirejs plugins
         'text' : 'lib/require/text',
         'async' : 'lib/require/async',
