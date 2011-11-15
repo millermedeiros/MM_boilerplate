@@ -36,6 +36,9 @@ echo "//end wrap---\nMustache.parse = Mustache.to_html;\nreturn Mustache;\n});" 
 echo "\n -- updating require.js --\n"
 curl https://raw.github.com/jrburke/requirejs/master/require.js > dev/site/js/lib/require/require.js
 
+echo "\n -- updating r.js --\n"
+curl https://raw.github.com/jrburke/r.js/master/dist/r-edge.js > dev/site/_build/rjs/r.js
+
 
 echo "\n -- updating require/text.js --\n"
 curl https://raw.github.com/jrburke/requirejs/master/text.js > dev/site/js/lib/require/text.js
