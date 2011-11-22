@@ -29,6 +29,7 @@
         // requirejs plugins
         'text' : 'lib/require/text',
         'async' : 'lib/require/async',
+        'goog' : 'lib/require/goog',
         'json' : 'lib/require/json',
         'noext' : 'lib/require/noext',
         'img' : 'lib/require/image'

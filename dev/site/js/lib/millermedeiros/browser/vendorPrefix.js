@@ -10,36 +10,37 @@ define([
             _testStyle = _testEl.style,
             _prevPrefix;
 
-        function toDomProp(prefix, prop){
-            return prefix? prefix + pascalCase(prop) : camelCase(prop);
+        function toDomProp(prefix, prop, isStyle){
+            prop = prefix? prefix +' '+ prop : prop;
+            return isStyle && prefix? pascalCase(prop) : camelCase(prop);
         }
 
         /**
          * Add browser specific prefixes based on feature detection.
          * methods will return `null` if property isn't supported.
          * @author Miller Medeiros
-         * @version 0.1.0 (2011/10/26)
+         * @version 0.2.1 (2011/11/13)
          */
         var vendorPrefix = {
 
-            dom : function(prop, scope){
+            dom : function(prop, scope, isStyle){
                 scope = scope || _testEl;
 
                 var i = 0,
                     prefix,
-                    prefixed = toDomProp(prop);
+                    prefixed = toDomProp(null, prop, isStyle);
 
                 if(prefixed in scope){
                     return prefixed;
                 } else if(_prevPrefix){
-                    prefixed = toDomProp(_prevPrefix, prop);
+                    prefixed = toDomProp(_prevPrefix, prop, isStyle);
                     //no need to test more if already found browser prefix..
                     return (prefixed in scope)? prefixed : null;
                 }
 
                 //only loops if never found a prefix before
                 while(prefix = _domPrefixes[i++]){
-                    prefixed = toDomProp(prefix, prop);
+                    prefixed = toDomProp(prefix, prop, isStyle);
                     if(prefixed in scope ){
                         _prevPrefix = prefix; //cache
                         return prefixed;
@@ -50,18 +51,21 @@ define([
             },
 
             style : function(prop){
-                return vendorPrefix.dom(prop, _testStyle);
+                return vendorPrefix.dom(prop, _testStyle, true);
             },
 
             css : function(prop){
                 var styleProp = vendorPrefix.style(prop),
+                    camelProp = camelCase(prop),
+                    hyphenStyle = hyphenate(styleProp),
                     val;
 
-                if(styleProp && styleProp.length === prop.length){
-                    val = prop;
-                } else if(styleProp && styleProp.length > prop.length){
+                if(styleProp && styleProp.length === camelProp.length){
+                    //no prefix
+                    val = hyphenStyle;
+                } else if(styleProp && styleProp.length > camelProp.length){
                     // -ms-, -o-, -webkit-, -moz- follow same pattern..
-                    val = '-'+ hyphenate(styleProp);
+                    val = '-'+ hyphenStyle;
                 }
 
                 return val;

@@ -14,8 +14,6 @@ Math utilities.
  - [`loop()`](#loop)
  - [`map()`](#map)
  - [`norm()`](#norm)
- - [`random()`](#random)
- - [`randomInt()`](#randomInt)
  - [`snap()`](#snap)
 
 
@@ -143,53 +141,6 @@ Gets normalized ratio of value inside range.
 ```js
 norm(50, 0, 100); // 0.5
 norm(75, 0, 100); // 0.75
-```
-
-
-## <a href="#random" name="random">random([min], [max], [shouldSnap]):Number</a>
-
-Gets a random number inside range or snap to min/max values.
-
-### Arguments:
-
- 1. `[min]` (Number)         : Minimum value. Defaults to `number.MIN_INT`.
- 2. `[max]` (Number)         : Maximum value. Defaults to `number.MAX_INT`.
- 3. `[shouldSnap]` (Boolean) : If it should snap random number to min/max.
-
-
-### Example:
-
-```js
-random();            // 448740433.55274725
-random();            // -31797596.097682
-random(0, 10);       // 7.369723
-random(0, 10);       // 5.987042
-random(0, 10, true); // 0
-random(0, 10, true); // 10
-```
-
-
-
-## <a href="#randomInt" name="randomInt">randomInt([min], [max], [shouldSnap]):Number</a>
-
-Gets a random integer inside range or snap to min/max values.
-
-### Arguments:
-
- 1. `[min]` (Number)         : Minimum value. Defaults to `number.MIN_INT`.
- 2. `[max]` (Number)         : Maximum value. Defaults to `number.MAX_INT`.
- 3. `[shouldSnap]` (Boolean) : If it should snap random number to min/max.
-
-
-### Example:
-
-```js
-randomInt();            // 448740433
-randomInt();            // -31797596
-randomInt(0, 10);       // 7
-randomInt(0, 10);       // 5
-randomInt(0, 10, true); // 0
-randomInt(0, 10, true); // 10
 ```
 
 

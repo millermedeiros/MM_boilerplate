@@ -57,6 +57,10 @@ echo "\n -- updating require/image.js --\n"
 curl https://raw.github.com/millermedeiros/requirejs-plugins/master/src/image.js > dev/site/js/lib/require/image.js
 
 
+echo "\n -- updating require/goog.js --\n"
+curl https://raw.github.com/millermedeiros/requirejs-plugins/master/src/goog.js > dev/site/js/lib/require/goog.js
+
+
 
 # Other Libs -----------
 
@@ -65,7 +69,8 @@ echo "\n -- updating amd-utils --\n"
 rm -rf dev/site/js/lib/amd-utils
 git clone https://github.com/millermedeiros/amd-utils.git dev/site/js/lib/amd-utils
 rm -rf dev/site/js/lib/amd-utils/.git/ dev/site/js/lib/amd-utils/tests/
-rm dev/site/js/lib/amd-utils/src/README.mdown dev/site/js/lib/amd-utils/.gitignore
+rm -rf dev/site/js/lib/amd-utils/_build/ dev/site/js/lib/amd-utils/doc/
+rm dev/site/js/lib/amd-utils/src/README.mdown dev/site/js/lib/amd-utils/.gitignore dev/site/js/lib/amd-utils/build.js
 mv dev/site/js/lib/amd-utils/src/* dev/site/js/lib/amd-utils/
 rmdir dev/site/js/lib/amd-utils/src/
 

@@ -4,10 +4,10 @@
  * extension or that shouldn't have one (like dynamic scripts).
  * Author: Miller Medeiros
  * Version: 0.3.0 (2011/10/26)
- * Released under the WTFPL <http://sam.zoy.org/wtfpl/>
+ * Released under the WTFPL
  */
 define(function(){
-    
+
     var QUERY_PARAM = 'noext';
 
     //API
