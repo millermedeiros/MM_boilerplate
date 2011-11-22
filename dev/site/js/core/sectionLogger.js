@@ -1,8 +1,11 @@
 // file used only for debugging purposes
 
-define(['mm/other/sectionController'], function (sectionController) {
+define(function () {
 
-    function init() {
+    //pass sectionController as parameter (aka dependency injection) to
+    //make it easier to update path to controller and toggle between multiple
+    //controllers...
+    function init(sectionController) {
 
         //for debugging purposes and to show `sectionController` API
         sectionController.initializedChange.add(function(){

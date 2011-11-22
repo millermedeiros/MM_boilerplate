@@ -74,21 +74,21 @@
     define(
         [
             'jquery',
-            'mm/other/sectionController',
-            'core/ui',
+            'core/sectionController',
             'core/sectionLogger',
+            'core/ui',
             'sections/sections'
         ],
-        function ($, sectionController, ui, sectionLogger, sections){
+        function ($, sectionController, sectionLogger, ui, sections){
 
             function init() {
                 console.log('[main.init]');
 
-                ui.init();
+                ui.init('#wrapper');
 
                 //if you don't want to log all the events from the section
                 //controller comment this line
-                sectionLogger.init();
+                sectionLogger.init(sectionController);
 
                 //initialize application
                 sectionController.DEFAULT_HASH = 'home';
