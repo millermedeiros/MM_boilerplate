@@ -35,6 +35,31 @@ try to keep it simple.
 
 
 
+## Branches ##
+
+### master
+
+`master` branch have a "basic" folder structure with almost no JS for the
+application logic (just some basic configuration settings).
+
+### spa
+
+`spa` stands for "single page app", and contain a base structure for single
+page apps and some example code with lots of comments explaining how to use the
+`sectionController` module to load/init/dispose sections as needed and how it 
+can simplify the logic on large projects.
+
+This branch is used more as an example to friends/coworkers and a sandbox for
+changes on the `sectionController` logic/structure than an actual starting
+point.
+
+### dojo
+
+Uses dojo instead of jQuery and shows how to setup r.js and paths to load dojo
+modules. Not being updated as often as other branches...
+
+
+
 ## Files/Folder Structure ##
 
 Since it is common to have multiple "apps" and many developers working for the
