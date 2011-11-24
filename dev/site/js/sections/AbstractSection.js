@@ -8,9 +8,9 @@ define([
     function (signals, mustache, template) {
 
 
-        //Just an example of how to create an abstract class to handle
+        //Just an example of how to create an abstract "class" to handle
         //section logic..
-        //on a real project I would probably make the abstract class accept
+        //on a real project I would probably make the AbstractSection accept
         //a template file and also the data to populate the template or would
         //add hooks for getting the data based on the arguments passed to
         //`init()`.
@@ -21,7 +21,10 @@ define([
 
             // initialized and ended signals are only needed if you are doing something
             // asynchronous during initialization or removal.
-            // only method that should be always implemented is the `init()`.
+            // only method that should be always implemented is the `init()`
+            // (if returned module isn't a constructor) if module is
+            // a constructor it will instantiate object and won't call
+            // `init()`.
             // If you add the signals to the public interface the sectionController
             // will listen for dispatchs, otherwise it will consider that everything
             // happened synchronously.
@@ -35,8 +38,12 @@ define([
 
         AbstractSection.prototype = {
 
-            init : function () {
+            init : function (parentSelector) {
                 console.log('[AbstractSection.init]', arguments);
+
+                //pass parent selector as first param to make it easier to
+                //update node if needed... avoid hard coding values.
+                this.$_parent = $(parentSelector);
 
                 var args = Array.prototype.slice.call(arguments);
 
@@ -45,6 +52,8 @@ define([
                     //parameters it will call the method `init()`
                     //so we just update the content
                     this._update(args);
+                    //notify sectionController it finished transition
+                    this.initialized.dispatch();
                 } else {
                     //otherwise we build the section
                     this._build(args);
@@ -66,13 +75,13 @@ define([
 
                 this._update(args); //reuse same method so we keep DRY
 
-                //append after adding content to improv perf
-                this.$_root.appendTo('#wrapper');
+                this.$_root.appendTo(this.$_parent);
                 this._animateIn();
             },
 
+            //break into a separate method so we can easily overwrite it
+            //to do wathever we want
             _animateIn : function () {
-                //so we can easily overwrite this method to do wathever we want
                 if (! this.$_root ) return;
 
                 this.$_root
@@ -91,13 +100,17 @@ define([
                     this.ended.dispatch();
                     return;
                 }
+                this._animateOut();
+            },
+
+            _animateOut : function(){
                 this.$_root.stop(true).fadeTo(500, 0, this._boundDispose);
             },
 
             _dispose : function () {
                 this.$_root.remove();
                 this.ended.dispatch();
-                this.$_root = null;
+                this.$_root = this.$_parent = null;
             }
 
         };

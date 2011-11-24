@@ -77,9 +77,9 @@
             'core/sectionController',
             'core/sectionLogger',
             'core/ui',
-            'sections/sections'
+            'sections/sectionsDescriptor'
         ],
-        function ($, sectionController, sectionLogger, ui, sections){
+        function ($, sectionController, sectionLogger, ui, sectionsDescriptor){
 
             function init() {
                 console.log('[main.init]');
@@ -90,14 +90,13 @@
                 //controller comment this line
                 sectionLogger.init(sectionController);
 
-                //initialize application
-                sectionController.DEFAULT_HASH = 'home';
+                sectionController.DEFAULT_ROUTE = 'home';
 
                 //if true start next section without waiting the previous one to end
                 //section.isAsync will override this setting
                 sectionController.DEFAULT_ASYNC = false;
 
-                sectionController.init(sections);
+                sectionController.init(sectionsDescriptor);
             }
 
 

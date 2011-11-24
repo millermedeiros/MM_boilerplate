@@ -10,11 +10,13 @@ define(['../AbstractSection'], function(AbstractSection) {
     //it and customize the behavior.
 
     _section._animateIn = function() {
-        //safe-guard in case the element doesn't exist anymore
-        if (! this.$_root ) return;
-
         //important to dispatch signal after initialization
-        this.$_root.hide().show(500, this._boundInitialized);
+        this.$_root.slideUp(0).stop(true).slideDown(500, this._boundInitialized);
+    };
+
+    _section._animateOut = function() {
+        //finish dispatch after animation (and dispatch ended signal)
+        this.$_root.stop(true).slideUp(500, this._boundDispose);
     };
 
     return _section;

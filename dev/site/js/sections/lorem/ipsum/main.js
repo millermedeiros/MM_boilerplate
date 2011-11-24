@@ -11,12 +11,12 @@ define(['text!./template.html'], function (template) {
 
     var $_root;
 
-    function init(id) {
+    function init(parentSelector, id) {
         console.log('[lorem/ipsum.init]');
 
         if (! $_root) {
             $_root = $(template);
-            $_root.appendTo('#wrapper').slideUp(0).slideDown(200);
+            $_root.appendTo(parentSelector).slideUp(0).slideDown(200);
         }
 
         update(id);
