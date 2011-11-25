@@ -46,7 +46,7 @@ application logic (just some basic configuration settings).
 
 `spa` stands for "single page app", and contain a base structure for single
 page apps and some example code with lots of comments explaining how to use the
-`sectionController` module to load/init/dispose sections as needed and how it 
+`sectionController` module to load/init/dispose sections as needed and how it
 can simplify the logic on large projects.
 
 This branch is used more as an example to friends/coworkers and a sandbox for
@@ -122,7 +122,8 @@ wouldn't benefit that much from base styles for each tag.
 
 ## Build ##
 
-This project uses [Apache Ant](http://ant.apache.org/) for the build process. Install Ant and run:
+This project uses [Apache Ant](http://ant.apache.org/) for the build process.
+Install Ant and run:
 
     cd dev/site
     ant deploy
@@ -144,10 +145,12 @@ Google gave me the proper result...
 The boilerplate uses many third-party libs (jQuery, RequireJS, amd-utils,
 mustache.js, hasher, crossroads, js-signals, etc...) to update them run:
 
+    cd dev/site
     sh update.sh
 
-Beware that it will delete/replace the old files, use with caution. I recommend
-even deleting the file after first update to avoid problems.
+Beware that it will delete/replace the old files, use with caution. If it's
+a SVN repository make sure to set `IS_SVN=true` at the top of the `update.sh`
+script.
 
 Not using git *submodules* or *sparse checkout* since they aren't flexible
 enough, most repositories have lots of test files and other stuff that isn't
@@ -155,11 +158,16 @@ needed...
 
 I was going to create an Ant task to update the libs (so it would run on
 windows as well) but the bash script is way more concise and I don't think
-anyone else is using these files anyway.
+anyone else is using these files anyway. Maybe I will convert it into
+a Python/Ruby/NodeJS script in the future so Windows users can also run the
+update task.
 
 
 
 ## License ##
 
-Released under the [WTFPL](http://sam.zoy.org/wtfpl/).
+The boilerplate itself is released under the [WTFPL](http://sam.zoy.org/wtfpl/)
+since it consist in almost no code, only folder structures and some basic setup
+code, but it uses many libraries with different licenses like MIT, New BSD,
+Apache and/or MPL. Make sure to check licenses of 3rd-party libs.
 
