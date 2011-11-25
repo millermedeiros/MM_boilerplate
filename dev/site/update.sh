@@ -115,10 +115,11 @@ fi
 git clone https://github.com/millermedeiros/amd-utils.git $SWAP_FOLDER/amd-utils
 rm -rf $SWAP_FOLDER/amd-utils/.git/ $SWAP_FOLDER/amd-utils/tests/
 rm -rf $SWAP_FOLDER/amd-utils/_build/ $SWAP_FOLDER/amd-utils/doc/
-rm $SWAP_FOLDER/amd-utils/src/README.mdown $SWAP_FOLDER/amd-utils/.gitignore $SWAP_FOLDER/amd-utils/build.js
+rm $SWAP_FOLDER/amd-utils/.gitignore $SWAP_FOLDER/amd-utils/build.js
 mv $SWAP_FOLDER/amd-utils/src/* $SWAP_FOLDER/amd-utils/
 rmdir $SWAP_FOLDER/amd-utils/src/
 cp -R $SWAP_FOLDER/amd-utils/. js/lib/amd-utils/
+mv $SWAP_FOLDER/amd-utils/README.mdown js/lib/millermedeiros/
 rm -rf $SWAP_FOLDER/amd-utils/
 
 
@@ -134,6 +135,7 @@ git clone https://github.com/millermedeiros/MM_js_lib.git $SWAP_FOLDER/millermed
 rm -rf $SWAP_FOLDER/millermedeiros/.git/ $SWAP_FOLDER/millermedeiros/lib/ $SWAP_FOLDER/millermedeiros/tests/ $SWAP_FOLDER/millermedeiros/src/_deprecated/
 rm $SWAP_FOLDER/millermedeiros/.gitignore $SWAP_FOLDER/millermedeiros/.gitmodules $SWAP_FOLDER/millermedeiros/.jshintrc
 cp -R $SWAP_FOLDER/millermedeiros/src/. js/lib/millermedeiros/
+mv $SWAP_FOLDER/millermedeiros/README.markdown js/lib/millermedeiros/
 rm -rf $SWAP_FOLDER/millermedeiros/
 
 
