@@ -1,7 +1,8 @@
 
 // This module is used as a section descriptor, each new section module or
 // route should be added to the SECTIONS array, all sections should have at
-// least an "id" and a "route".
+// least an "id", sectionController will use the "id" as "route" if route isn't
+// available.
 //
 // Constructors
 // ------------
@@ -17,12 +18,18 @@
 //
 // Options
 // -------
-// Available options:
-//  - id:String => Used internally to get proper section.
-//  - route:(String|RegExp) => See `crossroads.addRoute()` documentation.
+//  - id:String => Used internally to get proper section or as a route (if
+//  route is the same as ID)
 //  - [params]:Array => Arguments passed to `section.init()` or `new
 //  Section()` (if constructor) by default.
+//
+//  Route related:
+//  - [route]:(String|RegExp) => See `crossroads.addRoute()` documentation.
 //  - [rules]:Object => Route.rules.
+//  - [priority]:Number => Route priority (see `crossroads.addRoute`).
+//  - [greedy]:Boolean => crossroads Route.greedy.
+//
+//  Behavior:
 //  - [moduleId]:String => Path to module. It will load the module at given path
 //    if provided. Only use it if you wan't to override the normal
 //    id-to-module path resolution. (useful when you want multiple routes to
@@ -38,8 +45,7 @@ define(function () {
     var SECTIONS = [
         {
             "id" : "home",
-            "route" : "home",
-            "moduleId" : "sections/AbstractSection2",
+            "moduleId" : "sections/SimpleSection",
             "params" : ["Home"].concat(baseParams)
         },
         {
@@ -52,13 +58,11 @@ define(function () {
         },
         {
             "id" : "foo",
-            "route" : "foo",
-            "moduleId" : "sections/AbstractSection2",
+            "moduleId" : "sections/SimpleSection",
             "params" : ["Foo"].concat(baseParams)
         },
         {
             "id" : "lorem",
-            "route" : "lorem",
             "params" : baseParams
         },
         {
