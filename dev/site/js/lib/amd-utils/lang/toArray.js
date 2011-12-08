@@ -1,26 +1,21 @@
 define(['./isArray', './isObject', './isArguments'], function (isArray, isObject, isArguments) {
 
-    var _arrSlice = Array.prototype.slice;
+    var _win = this;
 
     /**
      * Convert array-like object into array
      * @author Miller Medeiros
-     * @version 0.1.1 (2011/11/23)
+     * @version 0.2.0 (2011/12/05)
      */
     function toArray(val){
-        var ret, key;
+        var ret;
 
         if (val == null) {
             ret = [];
-        } else if ( val && (isArray(val) || isArguments(val) || (isObject(val) && 'length' in val)) ) {
-            ret = _arrSlice.call(val);
-        } else if ( val && isObject(val) ) {
-            ret = [];
-            for(key in val){
-                if (val.hasOwnProperty(key)){
-                    ret.push( val[key] );
-                }
-            }
+        } else if ( val && val !== _win && (isArray(val) || isArguments(val) || (isObject(val) && 'length' in val)) ) {
+            //window returns true on isObject in IE7 and may have length property
+            //only convert object to array if it is a array-like object
+            ret = Array.prototype.slice.call(val);
         } else {
             //string, regexp, function have .length but user probably just want
             //to wrap value into an array..

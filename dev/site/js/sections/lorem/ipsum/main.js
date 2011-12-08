@@ -8,6 +8,10 @@ define(['text!./template.html'], function (template) {
     // note that only method required is "init()" and this section doesn't have
     // the signals "initialized" and "ended" so other sections won't wait the
     // animation to end before starting...
+    //
+    // it's also important to notice that sections doesn't need to inherit from
+    // AbstractSection, they just need to implement the "init()" method or be
+    // a constructor function.
 
     var $_root;
 

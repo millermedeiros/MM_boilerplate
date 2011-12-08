@@ -1,14 +1,10 @@
 define(function(require){
 
-    /**
-     * Utilities for time manipulation.
-     * @exports amd-utils/time
-     * @version 0.1.0 (2011/10/21)
-     * @author Miller Medeiros
-     */
-    return {
-        split        : require('./time/split'),
-        toTimeString : require('./time/toTimeString')
-    };
+//automatically generated, do not edit!
+//run `node build` instead
+return {
+    'parseMs' : require('./time/parseMs'),
+    'toTimeString' : require('./time/toTimeString')
+};
 
 });

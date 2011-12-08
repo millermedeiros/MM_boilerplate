@@ -1,17 +1,11 @@
-/*
- * from: basis/project.css
- */
-
-/* ========================== GENERIC CLASSES ======================== */
-
 
 /* --- font-styles --- */
 
 /*
  * If your project have a regular structure it may be a good idea to add
  * default styles to the headings that match the same style of these classes,
- * see: https://github.com/stubbornella/oocss/blob/master/core/heading/heading.css 
- * for reference. Not using this approach since in many of my projects having 
+ * see: https://github.com/stubbornella/oocss/blob/master/core/heading/heading.css
+ * for reference. Not using this approach since in many of my projects having
  * defaults causes more problems than it solves (many projects have a loose structure).
  */
 .h-1, .h-2, .h-3, .h-4, .h-5, .h-6{font-weight:bold; line-height:1em}
@@ -27,8 +21,3 @@
 .big{font-size:1.166em}
 .small{font-size:.833em}
 .del{text-decoration:line-through}
-
-
-/* --- other --- */
-
-.hr-1{background-color:#fff; border:1px solid #fff; border-top:1px solid #aaa; clear:both; margin:2em 0}

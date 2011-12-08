@@ -81,13 +81,13 @@ MM_boilerplate
     | `-js_build.js                 - JS optimization settings
     |~content/                  - Dynamic content like images, videos, etc. (simulate CMS or CDN)
     |~css/                      - Stylesheets
-    | |+basis/                      - Basis.css framework
+    | |+bss/                        - Basis.css framework
     | |+core/                       - Core strucure and generic classes/styles
     | |+fonts/                      - Webfonts
     | |+sections/                   - Style specific to each section/page/template
     | | `-home.css                      - Home page styles (create one file per section/page/template)
     | |+widgets/                    - Widgets/components styles
-    | `-main.css                    - Main stylesheet (loaded by all pages)
+    | `-master.css                  - Main stylesheet (loaded by all pages)
     |~img/                      - Image files (only images used by CSS)
     | |~core                        - Images shared by multiple sections (logo, bg, etc..)
     | `~home                        - Images used by the home page (create one folder per section/page/template)

@@ -56,7 +56,7 @@ define([
                     this.initialized.dispatch();
                 } else {
                     //otherwise we build the section
-                    this._build(args);
+                    this._setup(args);
                 }
 
             },
@@ -68,6 +68,14 @@ define([
                     .append( mustache.parse('{{#args}}<li>{{.}}</li>{{/args}}', {args: args}) );
             },
 
+            _setup : function(args){
+                //on a real project I would probably use some promises to chain
+                //these calls (so they can be async)
+                this._build(args);
+                this._afterBuild(args);
+                this._animateIn();
+            },
+
             _build : function (args) {
                 this.$_root = $( mustache.parse(template, {
                         sectionName : this._sectionName
@@ -76,8 +84,10 @@ define([
                 this._update(args); //reuse same method so we keep DRY
 
                 this.$_root.appendTo(this.$_parent);
-                this._animateIn();
             },
+
+            //overwrite if needed
+            _afterBuild : $.noop,
 
             //break into a separate method so we can easily overwrite it
             //to do wathever we want

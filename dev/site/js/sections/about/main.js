@@ -1,6 +1,6 @@
 console.log('-- about loaded --');
 
-define(['../AbstractSection'], function(AbstractSection) {
+define(['../abstract/AbstractSection'], function(AbstractSection) {
 
     // note that this module could be described on the "sections" as
     // {

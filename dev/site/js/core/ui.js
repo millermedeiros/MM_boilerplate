@@ -4,7 +4,7 @@ define(['./ui/mainNav'], function (mainNav) {
 
     function init(container) {
         mainNav.build(container);
-        $(container).addClass('pa20');
+        $(container).addClass('bss-pa20');
     }
 
     return {

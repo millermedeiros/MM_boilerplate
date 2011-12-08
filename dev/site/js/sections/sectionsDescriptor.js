@@ -39,6 +39,8 @@
 
 define(function () {
 
+    // a default parameter could be added by overloading the
+    // `sectionController.router.normalizeFn`, this is just a naive example.
     var baseParams = ['#wrapper'];
 
 

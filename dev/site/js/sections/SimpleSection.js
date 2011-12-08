@@ -1,4 +1,4 @@
-define(['amd-utils/lang/createObject', './AbstractSection'], function (createObject, AbstractSection) {
+define(['amd-utils/lang/createObject', './abstract/AbstractSection'], function (createObject, AbstractSection) {
 
     // same thing as AbstractSection but automatically calls init.
     function SimpleSection(name, rest){

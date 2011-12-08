@@ -1,13 +1,19 @@
 console.log('-- lorem loaded --');
 
-define(['../AbstractSection'], function(AbstractSection) {
+define(['../abstract/AbstractSection'], function(AbstractSection) {
 
     var _section = new AbstractSection('Lorem');
 
     //example of how to overwrite normal behavior.
     //that's why we create a new module and keep functions as small as
     //possible, if the function have a single purpose it is easier to overwrite
-    //it and customize the behavior.
+    //it and to customize the behavior.
+
+    _section._afterBuild = function(){
+        this.$_root
+            .append('<p>This section overwrites animations and add more content to the page.</p>')
+            .css('background-color', '#ffd');
+    };
 
     _section._animateIn = function() {
         //important to dispatch signal after initialization

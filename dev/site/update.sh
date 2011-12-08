@@ -119,7 +119,7 @@ rm $SWAP_FOLDER/amd-utils/.gitignore $SWAP_FOLDER/amd-utils/build.js
 mv $SWAP_FOLDER/amd-utils/src/* $SWAP_FOLDER/amd-utils/
 rmdir $SWAP_FOLDER/amd-utils/src/
 cp -R $SWAP_FOLDER/amd-utils/. js/lib/amd-utils/
-mv $SWAP_FOLDER/amd-utils/README.mdown js/lib/millermedeiros/
+mv $SWAP_FOLDER/amd-utils/README.mdown js/lib/amd-utils/
 rm -rf $SWAP_FOLDER/amd-utils/
 
 
@@ -143,14 +143,14 @@ rm -rf $SWAP_FOLDER/millermedeiros/
 echo "\n -- updating basis.css --\n"
 
 if $IS_SVN; then
-    find css/basis ! -wholename '*.svn*' -type f -delete
+    find css/ ! -wholename '*.svn*' -type f -delete
 else
-    rm -rf css/basis
+    rm -rf css/
 fi
 git clone https://github.com/millermedeiros/basis.css.git $SWAP_FOLDER/basis
 rm -rf $SWAP_FOLDER/basis/.git/ $SWAP_FOLDER/basis/.gitignore $SWAP_FOLDER/basis/index.html $SWAP_FOLDER/basis/demo.html
-cp -R $SWAP_FOLDER/basis/css/. css/basis/
-mv $SWAP_FOLDER/basis/README.md css/basis/
+cp -R $SWAP_FOLDER/basis/css/. css/
+mv $SWAP_FOLDER/basis/README.md css/
 rm -rf $SWAP_FOLDER/basis/
 
 

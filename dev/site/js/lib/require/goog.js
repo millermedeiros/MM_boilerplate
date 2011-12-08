@@ -1,20 +1,20 @@
 /** @license
  * RequireJS plugin for loading Google Ajax API modules thru `google.load`
  * Author: Miller Medeiros
- * Version: 0.1.1 (2011/11/21)
- * Released under the WTFPL
+ * Version: 0.2.0 (2011/12/06)
+ * Released under the MIT license
  */
-define(['async'], function () {
+define(['async', 'propertyParser'], function (async, propertyParser) {
 
-    var rParts = /^(^\w+)(?:,([^,]+))?(?:,\[([^\]]+)\])?/;
+    var rParts = /^([^,]+)(?:,([^,]+))?(?:,(.+))?/;
 
     function parseName(name){
         var match = rParts.exec(name),
             data = {
                 moduleName : match[1],
-                version : match[2] || '1',
-                packages : match[3]? match[3].split(',') : []
+                version : match[2] || '1'
             };
+        data.settings = propertyParser.parseProperties(match[3]);
         return data;
     }
 
@@ -23,13 +23,13 @@ define(['async'], function () {
             if (config.isBuild) {
                 onLoad(null); //avoid errors on the optimizer
             } else {
-                var data = parseName(name);
+                var data = parseName(name),
+                    settings = data.settings;
 
-                req(['async!'+ document.location.protocol +'//www.google.com/jsapi'], function(){
-                    google.load(data.moduleName, data.version, {
-                        packages : data.packages,
-                        callback : onLoad
-                    });
+                settings.callback = onLoad;
+
+                req(['async!'+ (document.location.protocol === 'https:'? 'https' : 'http') +'://www.google.com/jsapi'], function(){
+                    google.load(data.moduleName, data.version, settings);
                 });
             }
         }
