@@ -1,14 +1,12 @@
-define(['./forIn'], function (forIn) {
+define(['./forOwn'], function (forOwn) {
 
     /**
      * Get object keys
-     * @version 0.2.0 (2011/12/05)
-     * @author Miller Medeiros
+     * @version 0.3.0 (2011/12/17)
      */
-
      var keys = Object.keys || function (obj) {
             var keys = [];
-            forIn(obj, function(val, key){
+            forOwn(obj, function(val, key){
                 keys.push(key);
             });
             return keys;
