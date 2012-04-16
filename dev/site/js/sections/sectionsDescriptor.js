@@ -71,6 +71,14 @@ define(function () {
             "id" : "lorem/ipsum",
             "route" : "lorem/ipsum/:id:",
             "params" : baseParams
+        },
+        {
+            // you can create a 404 page by simply adding a route that matches
+            // anything and that has a low priority (so it will only be tested
+            // after checking the other routes)
+            "id" : "404",
+            "route" : ":foo*:", //match anything
+            "priority" : -9999 //make sure it is always the last one
         }
     ];
 
